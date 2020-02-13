@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs",
+    "deploy": "sh deploy.sh",
+    "serve": "serve docs/.vuepress/dist"
+  },
+  "devDependencies": {
+    "serve": "^11.3.0",
+    "vuepress": "^1.3.0"
+  }
+}
