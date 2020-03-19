@@ -11,6 +11,6 @@
   "homepage": "https://github.com/dented-kitchen/dented-kitchen.github.io",
   "devDependencies": {
     "serve": "^11.3.0",
-    "vuepress": "^1.3.0"
+    "vuepress": "^1.4.0"
   }
 }
