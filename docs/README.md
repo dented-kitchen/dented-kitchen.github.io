@@ -74,10 +74,10 @@ muffins.addIngredients({
 });
 
 // Or we could substitute a different variation
-muffins.substitute({ sugar: { variation: 'brown' }});
+muffins.substitute({ sugar: 'brownsugar' });
 ```
 
-After some changes to our `Recipe`, we can check the instructions and see that the `sugar` (default: `granulated`) has been replaced by `brown sugar` and that the new flavor ingredients are added at the appropriate places in the recipe. The `muffin` method used in this example is the backbone of many simple muffin, scone, and quick bread recipes.
+After some changes to our `Recipe`, we can check the instructions and see that the `sugar` (default: `granulated`) has been replaced by `brownsugar` and that the new flavor ingredients are added at the appropriate places in the recipe. The `muffin` method used in this example is the backbone of many simple muffin, scone, and quick bread recipes.
 
 ``` js
 // View the updated instructions
@@ -87,6 +87,39 @@ muffins.instructions.forEach(i => console.log(i.toString()));
 // When you do this function
 // Obviously this needs to be the actual instructions
 // So that they get the idea
+```
+
+Let's take a look at what it takes to create the `Pantry` dataset needed to enable the various features of the Replicake library. The dataset consists of 4 core concepts: ingredients, equipment, techniques, and methods. These can be provided directly when creating a recipe, or a data object can be provided to the library via `Replicake.use(pantry)` which we show how to create below.
+
+Note: The keys for each of these data sets must be unique within their respective data sets. Those keys are used when referencing other items in the data (for example, a technique may have a condition that requires a particular piece of equipment). When using more than one data set, keys are merged and existing properties overwritten by whichever data set is specified last. This allows you to easily expand and customize the `Pantry` data set.
+
+``` js
+import Pantry from 'pantry';
+
+let pantry = Pantry.Create({
+  ingredients: {
+    flour: {},
+    sugar: {
+      name: 'granulated sugar',
+      // Conversions can be provided to enable switching units
+      conversion: {
+        volume: '1 cup',
+        weight: '200g',
+      },
+
+      // Nutrition information enables recipe totals
+      nurtrition: { ... },
+    },
+    bakingsoda: {},
+    // ...
+  },
+  equipment: { ... },
+  techniques: { ... },
+  methods: {
+    muffin: {
+    },
+  },
+})
 ```
 
 ## Supplying your own method
