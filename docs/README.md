@@ -157,7 +157,7 @@ While this allows you to easily create a `Recipe` from a set of natural language
 ``` js
 import Replicake from 'replicake';
 
-let method = Replicate.CreateMethod({
+let method = Replicake.CreateMethod({
   name: 'muffin', // Optional
   instructions: [
     preheat('oven', '350F'),
@@ -203,7 +203,7 @@ These techniques also have a set of actions that represent the state change in t
 ``` js
 import Replicake from 'replicake';
 
-let preheat = Replicate.CreateTechnique({
+let preheat = Replicake.CreateTechnique({
   name: 'preheat',
   actions: [ setTemperature(oven, temperature) ],
   required: {
@@ -213,7 +213,7 @@ let preheat = Replicate.CreateTechnique({
   template: '${name} ${oven}${temperature}',
 });
 
-let mix = Replicate.CreateTechnique({
+let mix = Replicake.CreateTechnique({
   name: 'mix',
   actions: [
     // Add ingredients to the target if not already there
