@@ -9,12 +9,9 @@ module.exports = {
     ],
     sidebar: [
       ['/', 'Getting Started'],
-      '/recipe/',
-      '/ingredients/',
-      '/equipment/',
-      '/methods/',
       '/replicake/',
       '/pantry/',
+      '/pantry/ingredients/',
     ],
   }
 }
