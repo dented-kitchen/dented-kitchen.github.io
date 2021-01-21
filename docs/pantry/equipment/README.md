@@ -1,2 +1,2 @@
-# Equipment
+# List of Equipment
 

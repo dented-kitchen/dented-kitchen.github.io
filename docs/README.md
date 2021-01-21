@@ -1,4 +1,4 @@
-# Getting Started
+# Introduction
 
 ## What is Replicake?
 
@@ -12,13 +12,13 @@ Let's get started by creating your first recipe:
 import Replicake from 'replicake';
 import Pantry from 'pantry';
 
-// Use our open-source ingredient, equipment and technique dataset
+// Use our open source ingredient, equipment and technique dataset
 Replicake.use(Pantry);
 
 let muffins = Replicake.Create({
   ingredients: {
     flour: '240g',
-    sugar: '120g'
+    sugar: '120g',
     bakingpowder: '14g',
     salt: '5g',
     eggs: '1',
@@ -39,7 +39,7 @@ let muffins = Replicake.Create({
 });
 ```
 
-Most recipes today (even digital) include instructions in plain text. We take advantage of the fact that most recipes consist of the same set of `Techniques` to automatically generate the instruction text based on what is being done. This is the instruction text for the `Recipe` object we created:
+Most recipes today (even digital) include instructions in plain text. We take advantage of the fact that most recipes consist of the same set of `Techniques` to automatically generate the instruction text based on what is being done. This is the instruction text for the `Recipe` object we created. Generating this text is done by simply converting the instructions to strings (implicitly calling `toString()`).
 
 ```
 
