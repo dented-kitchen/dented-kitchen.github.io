@@ -1,5 +1,7 @@
 # Introduction
 
+Welcome to Dented Kitchen! We are the team behind Replicake, a library that lets you write powerful, dynamic recipes for cooking and baking. This introduction will show you how to create a recipe and give you a look at some of the library features. We'll also show you how those features are powered by Pantry, our open source ingredient data set.
+
 ## What is Replicake?
 
 Replicake is an open source Javascript library for the creation and manipulation of cooking and baking recipes. After creating a recipe, you can query for nutrition information, serving sizes and preparation time, or tweak your recipe by making allergy substitutions, flavor customizations, or updating the instructions depending on equipment availability (such as a stand mixer). Check out the `Recipe` class for more details.
@@ -10,9 +12,9 @@ Let's get started by creating your first recipe:
 
 ``` js
 import Replicake from 'replicake';
-import Pantry from 'pantry';
+import Pantry from '@dented-kitchen/pantry';
 
-// Use our open source ingredient, equipment and technique dataset
+// Use our open source ingredient dataset
 Replicake.use(Pantry);
 
 let muffins = Replicake.Create({
@@ -26,20 +28,31 @@ let muffins = Replicake.Create({
     vanilla: '1/2 tsp',
     buttermelted: '1 stick',
   },
+  equipment: {
+    oven: Replicake.Oven,
+    bowl: Replicake.Bowl,
+    bowl2: {
+      type: Replicake.Bowl,
+      name: 'another bowl',
+    },
+    pan: {
+      type: Replicake.Pan,
+      name: 'muffin pan',
+    },
+  },
   instructions: [
-    preheat('oven', '400F'),
-    sift('bowl', ingredientsTagged('dry')),
-    mix('bowl#2', ingredientsTagged('wet')),
-    mix('bowl', contents('bowl#2'), 'until just combined'),
-    fold('bowl', ingredientsTagged('pieces')),
-    distribute('muffin-pan', contents('bowl')),
-    bake('oven', 'muffin-pan', '20-30m'),
-    cool('muffin-pan', '10m'),
+    preheat({ temperature: '400F' }),
+    mix({ target: 'bowl', ingredients: tagged('dry') }),
+    mix({ target: 'bowl2', ingredients: tagged('wet') }),
+    mix({ target: 'bowl', ingredients: 'bowl2', suffix: 'until just combined' }),
+    distribute({ target: 'pan', ingredients: 'bowl' }),
+    bake({ target: 'pan', duration: { min: '20m', max: '30m' }, product: 'muffins' }),
+    cool({ target: 'muffins', duration: '10m' }),
   ],
 });
 ```
 
-Most recipes today (even digital) include instructions in plain text. We take advantage of the fact that most recipes consist of the same set of `Techniques` to automatically generate the instruction text based on what is being done. This is the instruction text for the `Recipe` object we created. Generating this text is done by simply converting the instructions to strings (implicitly calling `toString()`).
+Most recipes today (even digital) include instructions in plain text. This is how Replicake differs. We take advantage of the fact that most recipes consist of the same set of `Techniques` to automatically generate the instruction text based on what is being done. This is the instruction text for the `Recipe` object we created. Generating this text is done by simply converting the instructions to strings (implicitly calling `toString()`).
 
 ```
 
